@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.cuerpoTabla{
+  background-color: lightgrey;
+}

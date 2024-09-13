@@ -31,11 +31,31 @@ function ToDo() {
   };
 
   // borrar de localstorege las taras
-  const deleteTask = (id) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-  };
+  const deleteTask = async (id) => {
+    const MySwal = withReactContent(Swal);
+    MySwal.fire({
+        title: '¿Está seguro de eliminar la tarea?',
+        icon: 'question',
+        text: 'La tarea se eliminará de forma permanente',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const updatedTasks = tasks.filter((task) => task.id !== id);
+                setTasks(updatedTasks);
+                localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+                MySwal.fire('Eliminado', 'La tarea ha sido eliminada correctamente', 'success');
+            } catch (error) {
+                console.error('Error al eliminar tarea:', error);
+                MySwal.fire('Error', 'No se pudo eliminar la tarea. Inténtelo de nuevo.', 'error');
+            }
+        }
+    });
+};
+
+
 
   // Editar
   const editTask = (id, newText, newStatus) => {
@@ -49,7 +69,7 @@ function ToDo() {
   return (
     <div className="container">
       <h1 className="text-center my-4">
-        Mi Lista de Tareas (TODO List Grupo 3)
+       TODO List Grup #2
       </h1>
 
       <div className="row mb-3">
@@ -59,12 +79,12 @@ function ToDo() {
             className="form-control"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Nueva tarea"
+            placeholder="Ingrese Tarea"
           />
         </div>
         <div className="col-md-4">
           <button className="btn btn-primary w-100" onClick={addTask}>
-            Agregar tarea
+           + Agregar tarea
           </button>
         </div>
       </div>
@@ -96,12 +116,12 @@ function ToDo() {
                 <option value="En progreso">En progreso</option>
                 <option value="Finalizada">Finalizada</option>
               </select>
-              <button
+              <span
                 className="btn btn-danger"
                 onClick={() => deleteTask(task.id)}
               >
                 Eliminar
-              </button>
+              </span>
             </div>
           </li>
         ))}

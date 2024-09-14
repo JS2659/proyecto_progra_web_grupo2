@@ -2,7 +2,7 @@ import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content" 
 
 /**
- * Alerta para notificar una peración exitosa
+ * Alerta para notificar una 0peración exitosa
  * 
  * @param {string} mensaje - Mensaje a mostrar en la alerta
  */

@@ -50,7 +50,7 @@ button.btn-primary:hover {
 }
 
 button.btn-danger {
-  background-color: #ca1010; 
+  background-color: #0f0e0e; 
   border: none;
   transition: background-color 0.3s;
 }

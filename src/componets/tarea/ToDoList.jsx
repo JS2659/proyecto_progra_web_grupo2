@@ -8,12 +8,39 @@ import { defer } from "react-router-dom";
 function ToDo() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const MySwal = withReactContent(Swal);
 
   // Aqui me carga las tareas ya guardadas
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     setTasks(storedTasks);
   }, []);
+
+
+/**
+ * Alerta para notificar un error en la operación
+ * 
+ * @param {string} mensaje - Mensaje a mostrar en la alerta 
+ */
+const alertaError = (mensaje) => {
+  MySwal.fire({
+    title: mensaje,
+    icon: 'error',
+  });
+};
+
+/**
+ * Alerta para notificar éxito en la operación
+ * 
+ * @param {string} mensaje - Mensaje a mostrar en la alerta 
+ */
+const alertaExito = (mensaje) => {
+  MySwal.fire({
+    title: mensaje,
+    icon: 'success',
+  });
+};
+
 
   // Este es el boton para agregar una nueva tarea y guardar en localStorage
   const addTask = () => {
@@ -27,9 +54,14 @@ function ToDo() {
       setTasks(updatedTasks);
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       setNewTask("");
+  
+      // Reemplazar la alerta clásica por SweetAlert2
+      alertaExito("Tarea agregada con éxito");
+    } else {
+      alertaError("Por favor, introduce una tarea válida");
     }
   };
-
+  
   // borrar de localstorege las taras
   const deleteTask = async (id) => {
     const MySwal = withReactContent(Swal);
@@ -66,6 +98,8 @@ function ToDo() {
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
+
+  
   return (
     <div className="container">
       <h1 className="text-center my-4">

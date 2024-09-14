@@ -1,47 +1,13 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { alertaSuccess, alertaError, alertaWarning } from "../../funciones";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { defer } from "react-router-dom";
+
 
 function ToDo() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-  const MySwal = withReactContent(Swal);
-
-  // Aqui me carga las tareas ya guardadas
-  useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    setTasks(storedTasks);
-  }, []);
-
-
-/**
- * Alerta para notificar un error en la operación
- * 
- * @param {string} mensaje - Mensaje a mostrar en la alerta 
- */
-const alertaError = (mensaje) => {
-  MySwal.fire({
-    title: mensaje,
-    icon: 'error',
-  });
-};
-
-/**
- * Alerta para notificar éxito en la operación
- * 
- * @param {string} mensaje - Mensaje a mostrar en la alerta 
- */
-const alertaExito = (mensaje) => {
-  MySwal.fire({
-    title: mensaje,
-    icon: 'success',
-  });
-};
-
-
+ 
   // Este es el boton para agregar una nueva tarea y guardar en localStorage
   const addTask = () => {
     if (newTask.trim() !== "") {
@@ -55,14 +21,14 @@ const alertaExito = (mensaje) => {
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       setNewTask("");
   
-      // Reemplazar la alerta clásica por SweetAlert2
-      alertaExito("Tarea agregada con éxito");
+      alertaSuccess("Tarea agregada con éxito");
     } else {
       alertaError("Por favor, introduce una tarea válida");
     }
   };
   
-  // borrar de localstorege las taras
+  
+  // borrar de localstorege las tareas
   const deleteTask = async (id) => {
     const MySwal = withReactContent(Swal);
     MySwal.fire({

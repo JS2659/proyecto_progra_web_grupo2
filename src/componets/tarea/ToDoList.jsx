@@ -77,14 +77,14 @@ const addTask = () => {
     setTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
-  
+
 // --------------------------------------------------------------------------------------
 
   return (
     <div className="container">
 
       <header>
-        <h1 className="text-center my-4">TODO List</h1>
+        <h1 className="text-center my-4">...Proyecto de clase TODO List...</h1>
       </header>
 
       <div className="main-content">

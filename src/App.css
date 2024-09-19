@@ -12,6 +12,7 @@ body {
   flex-direction: column;
   position: relative; 
 }
+
 /* Superposición para el fondo */
 body::before {
   content: "";
@@ -41,8 +42,8 @@ header {
   width: 100%;
   z-index: 1000;
 }
-
 /*--------------------------------------------------------------------------------------*/
+
 footer {
   background-color: rgba(198, 137, 255, 0.7); /* Morado claro con transparencia */
   color: rgb(7, 0, 0);
@@ -54,8 +55,8 @@ footer {
   width: 100%;
   z-index: 1000;
 }
-
 /*--------------------------------------------------------------------------------------*/
+
 .main-content {
   flex-grow: 1;
   display: flex;
@@ -88,7 +89,7 @@ button.btn-primary {
 }
 
 button.btn-primary:hover {
-  background-color: #df0b0b;
+  background-color: #200bdf;
 }
 
 button.btn-danger {
